@@ -19,9 +19,51 @@
 
   <body>
     <h1>Universities</h1>
+    <div id="universities"></div>
 
     <script src="allFields.js"></script>
-    <script></script>
+    <script>
+      function universityDIV(key, value) {
+        return `<div class="uni-box">
+                <h6>${value.name}</h6>
+                <p>
+                  ${value.address} <strong>${value.city}</strong>
+                </p>
+                <p>${value.phone}</p>
+                <a href="${
+                  value.web
+                }" target="_blank" rel="noopener noreferrer">Website</a>
+                <div>
+                  ${
+                    value.fields
+                      ? value.fields.map(function(v) {
+                          return `<span>${v.name} (${v.percentage})</span>`;
+                        })
+                      : ""
+                  }
+                </div>
+              </div>`;
+      }
+
+      firebase
+        .database()
+        .ref("universities")
+        .once("value", function(param) {
+          var universities = param.val();
+          var universitiesDIV = document.getElementById("universities");
+          Object.keys(universities).forEach(function(key) {
+            var uni = universities[key];
+            universitiesDIV.innerHTML += universityDIV(key, uni);
+            uni.fields &&
+              uni.fields.forEach(function(v) {
+                console.log(v);
+              });
+          });
+          if (universities === null) {
+            alert("No universities in database.");
+          }
+        });
+    </script>
     <script src="./scripts/nav-bar.js"></script>
   </body>
 </html>

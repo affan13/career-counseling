@@ -13,7 +13,7 @@ var navbarKiInnerHTML = `<div class="container">
   </a>
   <ul class="nav navbar-nav navbar-right">
     <li class="a"><a href="./index.html">Home</a></li>
-    <li class="a"><a href="#">Find Universities</a></li>
+    <li class="a"><a href="./find-universities.html">Find Universities</a></li>
     <li class="a"><a href="./contacts.html">Blog</a></li>
     <li class="a"><a href="./about.html">About Us</a></li>
     <li class="a"><a href="./login.html">Login | SignUp</a></li>
