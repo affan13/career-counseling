@@ -1,99 +1,112 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
+    <link rel="stylesheet" href="./styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/custom.css" />
 
-  <link rel="stylesheet" href="./styles/fonts.googleapis.css">
-  <link rel="stylesheet" href="./styles/bootstrap.min.css">
-  <link rel="stylesheet" href="./styles/custom.css">
+    <script src="./scripts/jquery.min.js"></script>
+    <script src="./scripts/bootstrap.min.js"></script>
 
-  <script src="./scripts/jquery.min.js"></script>
-  <script src="./scripts/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script src="./scripts/init-firebase.js"></script>
+  </head>
 
-  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
-  <script src="./scripts/init-firebase.js"></script>
-</head>
+  <body>
+    <h1>Add Uni Data</h1>
+    <form action="#" onsubmit="return submitNewUni()">
+      <label for="name">Uni name</label>
+      <input type="text" placeholder="Uni Name" id="name" /><br />
+      <label for="address">Address</label>
+      <input type="text" placeholder="Address" id="address" /><br />
+      <label for="city">City</label>
+      <input type="text" placeholder="City" id="city" /><br />
+      <label for="phone">Phone</label>
+      <input type="number" placeholder="Phone" id="phone" /><br />
+      <label for="fee">Fee</label>
+      <input type="number" placeholder="Fee" id="fee" /><br />
+      <label for="web">Website Link</label>
+      <input type="link" placeholder="Website" id="web" /> <br />
+      <div id="fields" class=""></div>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
 
-<body>
-  <h1>Add Uni Data</h1>
-  <form action="#" onsubmit="return submitNewUni()">
-    <label for="name">Uni name</label>
-    <input type="text" placeholder="Uni Name" id="name" /><br>
-    <label for="address">Address</label>
-    <input type="text" placeholder="Address" id="address" /><br>
-    <label for="city">City</label>
-    <input type="text" placeholder="City" id="city" /><br>
-    <label for="phone">Phone</label>
-    <input type="number" placeholder="Phone" id="phone" /><br>
-    <label for="fee">Fee</label>
-    <input type="number" placeholder="Fee" id="fee" /><br>
-    <label for="web">Website Link</label>
-    <input type="link" placeholder="Website" id="web" /> <br>
-    <div id="fields" class=""></div>
-    <br>
-    <button type="submit">Submit</button>
-  </form>
-
-
-  <script>
-    var unis = ["Mechanical Engineering", "Electronics Engineering", "Chemical Engineering", "hhhhhhhh"];
-    var fields = document.getElementById("fields");
-
-
-    for (let i = 0; i < unis.length; i++) {
-      fields.innerHTML += "<input type='checkbox' class='' id='uni-" + i + "' /><label class='' for='uni-" + i + "'>"+unis[i]+"</label><br/>";
-    }
-
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        if (user.email !== "admin@fyp.com") { // to check if user is admin or not
-          // window.location = "index.html";
-          // alert("You are not Admin");
+    <script src="allFields.js"></script>
+    <script>
+      setCheckBoxes();
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          if (user.email !== "admin@fyp.com") {
+            // to check if user is admin or not
+            // window.location = "index.html";
+            // alert("You are not Admin");
+          }
+        } else {
+          // window.location = "login.html";
         }
-      } else {
-        // window.location = "login.html";
-      }
-    });
-
-    function submitNewUni() {
-      var f = document.getElementById("fields").value;
-      console.log(f);
-      return false;
-    }
-
-
-    function submitNewUni1() {
-      var db = firebase.database();
-      var ref = db.ref("universities/");
-
-      var name = document.getElementById("name").value;
-      var address = document.getElementById("address").value;
-      var phone = document.getElementById("phone").value;
-      var city = document.getElementById("city").value;
-      var fee = document.getElementById("fee").value;
-      var web = document.getElementById("web").value;
-
-      var uniDataObject = {
-        name: name,
-        address: address,
-        phone: phone,
-        city: city,
-        fee: fee,
-        web: web
-      }
-
-      ref.push(uniDataObject, function (error) {
-        console.log(error);
       });
 
-      return false;
-    }
-  </script>
-  <script src="./scripts/nav-bar.js"></script>
-</body>
+      function setCheckBoxes(unis = allFields) {
+        var fields = document.getElementById("fields");
+        unis.forEach(function(v, i) {
+          fields.innerHTML += `
+          <span class="cbox">
+            <input type="checkbox" class="" id="${i}" />
+            <label class="" for="${i}">${v.name}</label>
+          </span>
+          `;
+        });
+      }
+      function submitNewUni() {
+        var db = firebase.database();
+        var ref = db.ref("universities");
 
+        var name = document.getElementById("name").value;
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+        var city = document.getElementById("city").value;
+        var fee = document.getElementById("fee").value;
+        var web = document.getElementById("web").value;
+
+        var fields = [];
+
+        var inputs = document
+          .getElementById("fields")
+          .getElementsByTagName("input");
+
+        for (let i = 0; i < inputs.length; i++) {
+          const checkbox = inputs[i];
+          if (checkbox.checked) {
+            fields.push(allFields[checkbox.id]);
+          }
+        }
+
+        var uniDataObject = {
+          name: name,
+          address: address,
+          phone: phone,
+          city: city,
+          fee: fee,
+          web: web,
+          fields: fields
+        };
+
+        ref.push(uniDataObject, function(error) {
+          if (error === null) {
+            alert("New University added to Firebase.");
+          }
+          console.log(error);
+        });
+
+        return false;
+      }
+    </script>
+    <script src="./scripts/nav-bar.js"></script>
+  </body>
 </html>
