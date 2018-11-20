@@ -56,7 +56,7 @@
         var fields = document.getElementById("fields");
         unis.forEach(function(v, i) {
           fields.innerHTML += `
-            <span class="cbox">
+            <span class="cbox" onmousedown='return false;' onselectstart='return false;'>
               <input type="checkbox" class="" id="${i}" />
               <label class="" for="${i}">${v.name} (${v.percentage}%)</label>
             </span>
