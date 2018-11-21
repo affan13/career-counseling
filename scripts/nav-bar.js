@@ -5,13 +5,12 @@ var navbarKiInnerHTML = `<div class="container">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
   <a href="./index.html" style="padding: 0px">
     <img src="final-logo.png" alt="logo" style="width:120px;height:120px;" />
   </a>
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right" id="nav-bar-ul">
     <li class="a"><a href="./index.html">Home</a></li>
     <li class="a"><a href="./find-universities.html">Find Universities</a></li>
     <li class="a"><a href="./contacts.html">Blog</a></li>
@@ -34,5 +33,24 @@ function createNavBar() {
   newElement.innerHTML = navbarKiInnerHTML;
   parent.insertBefore(newElement, firstElement);
 }
+function signout() {
+  firebase
+    .auth()
+    .signOut()
+    .then(function() {
+      window.location.reload();
+    });
+}
+
+function addSignOutButton() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // adds sign-out button only if a user has signed in.
+      var ul = document.getElementById("nav-bar-ul");
+      ul.innerHTML += `<li class="a"><button onclick="signout()" class="btn btn-xs btn-danger">SignOut</button></li>`;
+    }
+  });
+}
 
 createNavBar();
+addSignOutButton();

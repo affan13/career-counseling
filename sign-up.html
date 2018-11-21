@@ -12,24 +12,11 @@
     <title>SignUp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-
-		<!-- Website CSS style -->
-		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-
-		<!-- Website Font style -->
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-		
-		<!-- Google Fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-
+    <!-- Website Font style -->
     <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
       rel="stylesheet"
-      id="bootstrap-css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
     />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
     <link rel="stylesheet" href="./styles/bootstrap.min.css" />
@@ -155,10 +142,11 @@
 
             <div class="form-group ">
               <button
+                onclick="signup()"
                 type="button"
                 class="btn btn-primary btn-lg btn-block login-button"
               >
-                Register
+                SignUp
               </button>
             </div>
             <div class="login-register"><a href="sign-in.html">Login</a></div>
@@ -169,9 +157,9 @@
 
     <script>
       function signup() {
-        var e = document.getElementById("email-up").value;
-        var p = document.getElementById("pass-up").value;
-        var cp = document.getElementById("cpass-up").value;
+        var e = document.getElementById("email").value;
+        var p = document.getElementById("password").value;
+        var cp = document.getElementById("confirm").value;
         if (p == cp) {
           firebase
             .auth()
@@ -188,8 +176,9 @@
               alert(errorMessage);
             });
         } else {
-          alert("Passwords do not match");
+          alert("Passwords do not match !");
         }
+        return false;
       }
     </script>
     <script src="./scripts/nav-bar.js"></script>

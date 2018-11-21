@@ -12,13 +12,6 @@
     <title>SignIn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
     <link rel="stylesheet" href="./styles/bootstrap.min.css" />
     <link rel="stylesheet" href="./styles/custom.css" />
@@ -38,13 +31,14 @@
             <h2>Login</h2>
             <p>Please enter your email and password</p>
           </div>
-          <form id="Login">
+          <form id="Login" onsubmit="return signin()">
             <div class="form-group">
               <input
                 type="email"
                 class="form-control"
-                id="inputEmail"
+                id="email-input"
                 placeholder="Email Address"
+                required
               />
             </div>
 
@@ -52,8 +46,9 @@
               <input
                 type="password"
                 class="form-control"
-                id="inputPassword"
+                id="password-input"
                 placeholder="Password"
+                required
               />
             </div>
             <!--
@@ -69,33 +64,9 @@
     </div>
 
     <script>
-      function signup() {
-        var e = document.getElementById("email-up").value;
-        var p = document.getElementById("pass-up").value;
-        var cp = document.getElementById("cpass-up").value;
-        if (p == cp) {
-          firebase
-            .auth()
-            .createUserWithEmailAndPassword(e, p)
-            .then(function(response) {
-              if (response) {
-                alert("Signed up successfully: " + e);
-              }
-            })
-            .catch(function(error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              alert(errorMessage);
-            });
-        } else {
-          alert("Passwords do not match");
-        }
-      }
-
       function signin() {
-        var e = document.getElementById("email-in").value;
-        var p = document.getElementById("pass-in").value;
+        var e = document.getElementById("email-input").value;
+        var p = document.getElementById("password-input").value;
 
         firebase
           .auth()
@@ -110,6 +81,8 @@
               alert("Signed in successfully: " + e);
               if (response.user.email === "admin@fyp.com") {
                 window.location = "./admin-add-uni.html";
+              } else {
+                window.location = "./find-universities.html";
               }
             }
           })
@@ -119,6 +92,7 @@
             var errorMessage = error.message;
             alert(errorMessage);
           });
+        return false;
       }
     </script>
     <script src="./scripts/nav-bar.js"></script>
