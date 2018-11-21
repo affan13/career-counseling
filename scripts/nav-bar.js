@@ -16,7 +16,8 @@ var navbarKiInnerHTML = `<div class="container">
     <li class="a"><a href="./find-universities.html">Find Universities</a></li>
     <li class="a"><a href="./contacts.html">Blog</a></li>
     <li class="a"><a href="./about.html">About Us</a></li>
-    <li class="a"><a href="./login.html">Login | SignUp</a></li>
+    <li class="a"><a href="./sign-in.html">Login</a></li>
+    <li class="a"><a href="./sign-up.html">SignUp</a></li>
   </ul>
 </div>
 </div>`;
