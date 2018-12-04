@@ -37,11 +37,9 @@ p {
 }
 .navbar-nav li a:hover {
   color: #1abc9c !important;
-  font-size: 9px;
 }
 
-.a {
-  margin-left: 3px;
+.navbar-nav li {
   margin-top: 6%;
   font-size: 18px;
 }
