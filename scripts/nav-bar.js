@@ -47,6 +47,9 @@ function addSignOutButton() {
     if (user) {
       // adds sign-out button only if a user has signed in.
       var ul = document.getElementById("nav-bar-ul");
+      if (ul == null) {
+        return;
+      }
       ul.innerHTML += `<li class="a"><button onclick="signout()" class="btn btn-xs btn-danger">SignOut</button></li>`;
     }
   });
