@@ -20,14 +20,16 @@ var navbarKiInnerHTML = `<div class="container">
   </ul>
 </div>
 </div>`;
-var styleTag = `<link rel="stylesheet" href="./styles/custom.css">`;
 
 function createNavBar() {
+  // to put tab icon on every page
   document.getElementsByTagName(
     "head"
   )[0].innerHTML += `<link rel="icon" href="final-logo.png">`;
+
   var parent = document.getElementsByTagName("body")[0];
   var firstElement = parent.firstElementChild;
+  
   let newElement = document.createElement("nav");
   newElement.setAttribute("class", "navbar navbar-default");
   newElement.innerHTML = navbarKiInnerHTML;
@@ -40,6 +42,7 @@ function signout() {
     .then(function() {
       window.location.reload();
     });
+    
 }
 
 function addSignOutButton() {
@@ -48,11 +51,14 @@ function addSignOutButton() {
       // adds sign-out button only if a user has signed in.
       var ul = document.getElementById("nav-bar-ul");
       if (ul == null) {
-        return;
+        return; // return back from current Function
       }
       ul.innerHTML += `<li class="a"><button onclick="signout()" class="btn btn-xs btn-danger">SignOut</button></li>`;
     }
   });
+}
+function addFooter() {
+  
 }
 
 createNavBar();

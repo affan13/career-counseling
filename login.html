@@ -58,11 +58,13 @@
       var p = document.getElementById("pass-up").value;
       var cp = document.getElementById("cpass-up").value;
       if (p == cp) {
-        firebase.auth().createUserWithEmailAndPassword(e, p).then(function (response) {
+        firebase.auth().createUserWithEmailAndPassword(e, p)
+        .then(function (response) {
           if (response) {
             alert("Signed up successfully: " + e)
           }
-        }).catch(function (error) {
+        })
+        .catch(function (error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
