@@ -29,7 +29,7 @@ function createNavBar() {
 
   var parent = document.getElementsByTagName("body")[0];
   var firstElement = parent.firstElementChild;
-  
+
   let newElement = document.createElement("nav");
   newElement.setAttribute("class", "navbar navbar-default");
   newElement.innerHTML = navbarKiInnerHTML;
@@ -42,7 +42,6 @@ function signout() {
     .then(function() {
       window.location.reload();
     });
-    
 }
 
 function addSignOutButton() {
@@ -58,8 +57,32 @@ function addSignOutButton() {
   });
 }
 function addFooter() {
-  
+  var footerInnerHTML = `<footer class="social-footer">
+  <div class="social-footer-left">&copy; 2018, All Rights Reserved.</div>
+  <div class="social-footer-icons">
+    <ul class="menu simple">
+      <a href="https://www.facebook.com/"
+        ><i class="fa fa-facebook" aria-hidden="true"></i
+      ></a>
+      <a href="https://www.instagram.com/?hl=en"
+        ><i class="fa fa-instagram" aria-hidden="true"></i
+      ></a>
+      <a href="https://www.pinterest.com/"
+        ><i class="fa fa-pinterest-p" aria-hidden="true"></i
+      ></a>
+      <a href="https://twitter.com/?lang=en"
+        ><i class="fa fa-twitter" aria-hidden="true"></i
+      ></a>
+    </ul>
+  </div>
+</footer>`;
+  document.head.innerHTML += `<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+rel="stylesheet"
+/>`;
+  document.getElementsByTagName("body")[0].innerHTML += footerInnerHTML;
 }
 
 createNavBar();
+addFooter();
 addSignOutButton();
