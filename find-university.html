@@ -5,7 +5,7 @@ DOCTYPE
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Admin</title>
+  <title>Find Matching</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
@@ -59,9 +59,9 @@ DOCTYPE
 
     function checkUniversities() {
       var fieldName = document.getElementById("all-fields").value;
-      var cityName = document.getElementById("cities").value;
+      var cityName = document.getElementById("cities").value.toLowerCase().trim();
       var percentage = document.getElementById("percentage").value;
-      var feeRange = document.getElementById("fee-range").value;
+      var userFeeRange = parseFloat(document.getElementById("fee-range").value);
       var universitiesDIV = document.getElementById("universities");
 
       firebase
@@ -81,18 +81,21 @@ DOCTYPE
           for (key of uniArray) {
             var uni = universities[key];
 
+            var cityToCheck = uni.city.trim().toLowerCase();
+            var feeToCheck = parseFloat(uni.fee.replace(/,/g, ""));
+
             var matching = {};
 
-            matching.city = cityName.toLowerCase() == uni.city.trim().toLowerCase() ? uni.city : "";
-            matching.feeRange = parseFloat(feeRange) <= parseFloat(uni.fee.replace(/,/g, "")) ? uni.fee : 0;
+            matching.city = cityName == cityToCheck ? uni.city : "";
+            matching.feeRange = userFeeRange >= feeToCheck ? uni.fee : 0;
 
             var allFieldsOfUni = uni.fields;
             if (allFieldsOfUni) {
               for (var field of allFieldsOfUni) {
-                var fSelected = fieldName.toLowerCase().trim();
-                var fToCheck = field.name.toLowerCase().trim();
+                var userField = fieldName.toLowerCase().trim();
+                var fieldToCheck = field.name.toLowerCase().trim();
 
-                if ((fSelected.indexOf(fToCheck) > -1 || fToCheck.indexOf(fSelected) > -1) &&
+                if ((userField.indexOf(fieldToCheck) > -1 || fieldToCheck.indexOf(userField) > -1) &&
                   field.percentage <= parseFloat(percentage)) {
                   matching.field = field.name;
                   matching.percentage = field.percentage;
@@ -101,10 +104,13 @@ DOCTYPE
               }
             }
 
-            if (!!matching.city && !!matching.field && !!matching.percentage) {
+            if (!!matching.city && !!matching.field && !!matching.percentage && !!matching.feeRange) {
               universitiesDIV.innerHTML += matchedUniDIV(uni, matching);
               matchedUniversityKeys.push(key);
             }
+          }
+          if (!matchedUniversityKeys.length) {
+            alert("No University matches the filter !");
           }
 
         });

@@ -30,7 +30,6 @@ var allFields = [
   { name: "Architecture", percentage: 69 }
 ];
 
-
 var allCities = [
   "Karachi",
   "Islamabad",
@@ -100,6 +99,36 @@ function matchedUniDIV(uni, matching) {
             <a href="${uni.web}" target="_blank" rel="noopener noreferrer">Check website</a>
           </div>`;
 }
+
 // removeAllFields();
 // uploadAllFields();
 // getAllFields();
+
+/*
+ RIASEC is mapped with 123456
+ So, if an answer is "R" then we will give it "1",
+ if "R" then "1"
+ if "I" then "2"
+ if "A" then "3"
+ if "S" then "4"
+ if "E" then "5"
+ if "C" then "6"
+*/
+var _questions = [
+  { question: "I like to work on cars", answer: "1" },
+  { question: "I like to do puzzles", answer: "2" },
+  { question: "I am good at working independently", answer: "3" },
+  { question: "I like to work in teams", answer: "4" },
+  { question: "I am an ambitious person, I set goals for myself", answer: "5" },
+  { question: "I like to organize things, (files, desks/offices)", answer: "6" },
+  { question: "I like to build things", answer: "1" },
+];
+
+var _options = {
+  "1": "R",
+  "2": "I",
+  "3": "A",
+  "4": "S",
+  "5": "E",
+  "6": "C",
+}
