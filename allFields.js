@@ -96,7 +96,7 @@ function matchedUniDIV(uni, matching) {
             <p>Percentage Required: ${matching.percentage}%</p>
             <p>${uni.address} <strong>${uni.city}</strong> </p>
             <p>Admission Fee: ${uni.fee}</p>
-            <p>COntact No: ${uni.phone}</p>
+            <p>Contact No: ${uni.phone}</p>
             <a href="${uni.web}" target="_blank" rel="noopener noreferrer">Check website</a>
           </div>`;
 }

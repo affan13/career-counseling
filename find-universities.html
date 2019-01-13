@@ -34,12 +34,6 @@
         Object.keys(universities).forEach(function (key) {
           var uni = universities[key];
           universitiesDIV.innerHTML += universityDIV(key, uni);
-
-          uni.fields &&
-            uni.fields.forEach(function (v) {
-              // console.log(v);
-            });
-
         });
         if (universities === null) {
           alert("No universities in database.");

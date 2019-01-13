@@ -1,4 +1,5 @@
-<!DOCTYPE <!DOCTYPE html>
+DOCTYPE
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -85,21 +86,27 @@
             matching.city = cityName.toLowerCase() == uni.city.trim().toLowerCase() ? uni.city : "";
             matching.feeRange = parseFloat(feeRange) <= parseFloat(uni.fee.replace(/,/g, "")) ? uni.fee : 0;
 
-            uni.fields &&
-              uni.fields.forEach(function (field) {
-                matching.field = fieldName.toLowerCase() == field.name.toLowerCase() ? fieldName : "";
-                matching.percentage = field.percentage <= parseFloat(percentage) ? field.percentage : 0;
-              });
+            var allFieldsOfUni = uni.fields;
+            if (allFieldsOfUni) {
+              for (var field of allFieldsOfUni) {
+                var fSelected = fieldName.toLowerCase().trim();
+                var fToCheck = field.name.toLowerCase().trim();
+
+                if ((fSelected.indexOf(fToCheck) > -1 || fToCheck.indexOf(fSelected) > -1) &&
+                  field.percentage <= parseFloat(percentage)) {
+                  matching.field = field.name;
+                  matching.percentage = field.percentage;
+                  break;
+                }
+              }
+            }
 
             if (!!matching.city && !!matching.field && !!matching.percentage) {
+              universitiesDIV.innerHTML += matchedUniDIV(uni, matching);
               matchedUniversityKeys.push(key);
             }
           }
 
-          console.log(matchedUniversityKeys);
-          for (var matchedKey of matchedUniversityKeys) {
-            universitiesDIV.innerHTML += matchedUniDIV(universities[matchedKey], matching);
-          }
         });
 
       // return false;
