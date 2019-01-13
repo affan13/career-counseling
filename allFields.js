@@ -30,12 +30,29 @@ var allFields = [
   { name: "Architecture", percentage: 69 }
 ];
 
+
+var allCities = [
+  "Karachi",
+  "Islamabad",
+  "Lahore",
+  "Peshawar",
+  "Hyderabad",
+  "Multan",
+  "Faisalabad",
+  "Gujrat",
+  "Jamshoro",
+  "Taxila",
+  "Quetta",
+  "Rawalpindi",
+  "Topi (KPK)",
+]
+
 var fieldsOnFirebase = null;
 function getAllFields() {
   firebase
     .database()
     .ref("allFields")
-    .once("value", function(params) {
+    .once("value", function (params) {
       fieldsOnFirebase = params.val();
       if (!!fieldsOnFirebase) {
         // setCheckBoxes(fieldsOnFirebase);
@@ -58,6 +75,30 @@ function uploadAllFields() {
       .ref("allFields")
       .push(allFields[i], console.log);
   }
+}
+
+function universityDIV(key, value) {
+  return `<div class="uni-box">
+            <h4>${value.name}</h4>
+            <p>${value.address} <strong>${value.city}</strong> </p>
+            <p>${value.phone}</p>
+            <a href="${value.web}" target="_blank" rel="noopener noreferrer">Check website</a>
+            <div>${value.fields && value.fields.map ? value.fields.map(function (v) {
+    return `<span>${v.name} (${v.percentage})</span>`;
+  }) : ""}
+            </div>
+          </div>`;
+}
+
+function matchedUniDIV(uni, matching) {
+  return `<div class="uni-box">
+            <h4><strong>${matching.field}</strong> in ${uni.name}</h4>
+            <p>Percentage Required: ${matching.percentage}%</p>
+            <p>${uni.address} <strong>${uni.city}</strong> </p>
+            <p>Admission Fee: ${uni.fee}</p>
+            <p>COntact No: ${uni.phone}</p>
+            <a href="${uni.web}" target="_blank" rel="noopener noreferrer">Check website</a>
+          </div>`;
 }
 // removeAllFields();
 // uploadAllFields();

@@ -1,0 +1,110 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
+  <link rel="stylesheet" href="./styles/bootstrap.min.css" />
+  <link rel="stylesheet" href="./styles/custom.css" />
+
+  <script src="./scripts/jquery.min.js"></script>
+  <script src="./scripts/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script src="./scripts/init-firebase.js"></script>
+</head>
+
+<body>
+  <h1>Find Matching University</h1>
+
+
+  <form action="#" onsubmit="checkUniversities()">
+
+    <label for="all-fields">Select Field</label>
+    <select id="all-fields"></select> <br />
+
+    <label for="percentage">Percentage (%)</label>
+    <input type="number" id="percentage" /> <br />
+
+    <label for="fee-range">Fee Range</label>
+    <input type="number" id="fee-range" /> <br />
+
+    <label for="cities">City</label>
+    <select id="cities"></select> <br />
+
+    <button type="submit">Check Universities</button>
+  </form>
+
+  <div id="universities"></div>
+
+  <script src="./scripts/nav-bar.js"></script>
+  <script src="./allFields.js"></script>
+  <script>
+    var fieldsSelectInput = document.getElementById("all-fields");
+    fieldsSelectInput.innerHTML = "";
+
+    for (var i = 0; i < allFields.length; i++) { // displaying all field names
+      fieldsSelectInput.innerHTML += `<option value="${allFields[i].name}">${allFields[i].name}</option>`;
+    }
+
+    var cities = document.getElementById("cities");
+    cities.innerHTML = "";
+    for (var i = 0; i < allCities.length; i++) { // displaying all city names
+      cities.innerHTML = cities.innerHTML + `<option value="${allCities[i]}">${allCities[i]}</option>`;
+    }
+
+    function checkUniversities() {
+      var fieldName = document.getElementById("all-fields").value;
+      var cityName = document.getElementById("cities").value;
+      var percentage = document.getElementById("percentage").value;
+      var feeRange = document.getElementById("fee-range").value;
+      var universitiesDIV = document.getElementById("universities");
+
+      firebase
+        .database()
+        .ref("universities")
+        .once("value", function (param) {
+          var universities = param.val();
+          if (universities === null) {
+            alert("No universities in database.");
+            return;
+          }
+
+          var uniArray = Object.keys(universities);
+          var matchedUniversityKeys = [];
+          universitiesDIV.innerHTML = "";
+          console.clear();
+          for (key of uniArray) {
+            var uni = universities[key];
+
+            var matching = {};
+
+            matching.city = cityName.toLowerCase() == uni.city.trim().toLowerCase() ? uni.city : "";
+            matching.feeRange = parseFloat(feeRange) <= parseFloat(uni.fee.replace(/,/g, "")) ? uni.fee : 0;
+
+            uni.fields &&
+              uni.fields.forEach(function (field) {
+                matching.field = fieldName.toLowerCase() == field.name.toLowerCase() ? fieldName : "";
+                matching.percentage = field.percentage <= parseFloat(percentage) ? field.percentage : 0;
+              });
+
+            if (!!matching.city && !!matching.field && !!matching.percentage) {
+              matchedUniversityKeys.push(key);
+            }
+          }
+
+          console.log(matchedUniversityKeys);
+          for (var matchedKey of matchedUniversityKeys) {
+            universitiesDIV.innerHTML += matchedUniDIV(universities[matchedKey], matching);
+          }
+        });
+
+      // return false;
+    }
+  </script>
+</body>
+
+</html>

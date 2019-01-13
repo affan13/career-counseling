@@ -86,3 +86,8 @@ p {
   transition: color 0.3s ease-in;
 }
 
+#fields {
+  width: 80%;
+  height: 30%;
+  overflow: scroll;
+}

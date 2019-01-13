@@ -1,0 +1,282 @@
+{
+  "-LRfwwTJsY2HMwMRtfVS": {
+    "address": "Karachi",
+    "city": "karachi",
+    "fee": "4000",
+    "name": "bahria",
+    "phone": "00888",
+    "web": ""
+  },
+  "-LRkLFmLga2wnyuVDQmU": {
+    "address": "karachi",
+    "city": "karachi",
+    "fee": "80000",
+    "fields": [
+      {
+        "name": "Electronics Engineering",
+        "percentage": 73,
+        "admissionFee": 80000
+      },
+      {
+        "name": "Chemical Engineering",
+        "percentage": 74,
+        "admissionFee": 90000
+      },
+      {
+        "name": "Materials Engineering",
+        "percentage": 75,
+        "admissionFee": 85000
+
+      },
+      {
+        "name": "Petroleum Engineering",
+        "percentage": 76,
+        "admissionFee": 100000
+      },
+      {
+        "name": "Civil Engineering",
+        "percentage": 78
+      },
+      {
+        "name": "Computer System Engineering",
+        "percentage": 79
+      },
+      {
+        "name": "Software Engineering",
+        "percentage": 80
+      },
+      {
+        "name": "Electrical Power Engineering",
+        "percentage": 81
+      }
+    ],
+    "name": "bahria",
+    "phone": "09000",
+    "web": "bahria.com"
+  },
+  "-LSW4TDlFHzxEtfIrRSk": {
+    "address": "university road",
+    "city": "karachi",
+    "fee": "23000",
+    "fields": [
+      {
+        "name": "Chemical Engineering",
+        "percentage": 74
+      },
+      {
+        "name": "Pharm.D",
+        "percentage": 85
+      },
+      {
+        "name": "Media Sciences",
+        "percentage": 88
+      },
+      {
+        "name": "Fashion Designing",
+        "percentage": 60
+      },
+      {
+        "name": "Textile Designing",
+        "percentage": 61
+      },
+      {
+        "name": "BBA (Human Resources)",
+        "percentage": 63
+      },
+      {
+        "name": "BBA (Supply Chain)",
+        "percentage": 64
+      },
+      {
+        "name": "BBA (Finance)",
+        "percentage": 66
+      },
+      {
+        "name": "Social Sciences",
+        "percentage": 68
+      },
+      {
+        "name": "Architecture",
+        "percentage": 69
+      }
+    ],
+    "name": "ku",
+    "phone": "92337363634",
+    "web": "karachiuni.com"
+  },
+  "-LT48C5fRU6GJ9_79NsG": {
+    "address": "Nothern Bypass",
+    "city": "karachi",
+    "fee": "60000",
+    "fields": [
+      {
+        "name": "Mechanical Engineering",
+        "percentage": 72
+      },
+      {
+        "name": "Electronics Engineering",
+        "percentage": 73
+      },
+      {
+        "name": "Telecommunication Engineering",
+        "percentage": 77
+      },
+      {
+        "name": "Computer System Engineering",
+        "percentage": 79
+      },
+      {
+        "name": "Software Engineering",
+        "percentage": 80
+      },
+      {
+        "name": "Electrical Power Engineering",
+        "percentage": 81
+      },
+      {
+        "name": "Eastern Medicine",
+        "percentage": 84
+      },
+      {
+        "name": "Pharm.D",
+        "percentage": 85
+      },
+      {
+        "name": "MBBS (Bachelors of Medicine and Bachelors of Surgery)",
+        "percentage": 86
+      },
+      {
+        "name": "BDS (Bachelors of Dental Surgery)",
+        "percentage": 87
+      },
+      {
+        "name": "Computer Science",
+        "percentage": 62
+      },
+      {
+        "name": "BBA (Human Resources)",
+        "percentage": 63
+      },
+      {
+        "name": "BBA (Accounts)",
+        "percentage": 65
+      }
+    ],
+    "name": "Hamdard University",
+    "phone": "02135464676",
+    "web": "hamdard.edu.pk"
+  },
+  "-LT6KAY1apFtltwdvcJJ": {
+    "address": "edfc",
+    "city": "edascx",
+    "fee": "33244",
+    "fields": [
+      {
+        "name": "Mechanical Engineering",
+        "percentage": 72
+      }
+    ],
+    "name": "ef",
+    "phone": "344",
+    "web": "ddf"
+  },
+  "-LT6KB3PAwPoDflEVzAi": {
+    "address": "edfc",
+    "city": "edascx",
+    "fee": "33244",
+    "fields": [
+      {
+        "name": "Mechanical Engineering",
+        "percentage": 72
+      }
+    ],
+    "name": "ef",
+    "phone": "344",
+    "web": "ddf"
+  },
+  "-LT6YL8NjV3iEDrGGGr6": {
+    "address": "karachi",
+    "city": "karachi",
+    "fee": "50000",
+    "fields": [
+      {
+        "name": "Electronics Engineering",
+        "percentage": 73
+      },
+      {
+        "name": "Telecommunication Engineering",
+        "percentage": 77
+      },
+      {
+        "name": "Civil Engineering",
+        "percentage": 78
+      },
+      {
+        "name": "MBBS (Bachelors of Medicine and Bachelors of Surgery)",
+        "percentage": 86
+      },
+      {
+        "name": "BBA (Supply Chain)",
+        "percentage": 64
+      }
+    ],
+    "name": "karachi university",
+    "phone": "4345346456",
+    "web": "karachiuni"
+  },
+  "-LT6YLQioUgEFPDMDtas": {
+    "address": "karachi",
+    "city": "karachi",
+    "fee": "50000",
+    "fields": [
+      {
+        "name": "Electronics Engineering",
+        "percentage": 73
+      },
+      {
+        "name": "Telecommunication Engineering",
+        "percentage": 77
+      },
+      {
+        "name": "Civil Engineering",
+        "percentage": 78
+      },
+      {
+        "name": "MBBS (Bachelors of Medicine and Bachelors of Surgery)",
+        "percentage": 86
+      },
+      {
+        "name": "BBA (Supply Chain)",
+        "percentage": 64
+      }
+    ],
+    "name": "karachi university",
+    "phone": "4345346456",
+    "web": "karachiuni"
+  },
+  "-LT72qgrs9Ieek0i_47K": {
+    "address": "karachi",
+    "city": "karachi",
+    "fee": "78578578",
+    "fields": [
+      {
+        "name": "Electronics Engineering",
+        "percentage": 73
+      },
+      {
+        "name": "Telecommunication Engineering",
+        "percentage": 77
+      },
+      {
+        "name": "BBA (Accounts)",
+        "percentage": 65
+      }
+    ],
+    "name": "fast",
+    "phone": "75587",
+    "web": "bhk"
+  }
+
+ // area, city, percentage, fee, field,
+
+}
