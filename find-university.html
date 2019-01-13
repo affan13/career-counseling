@@ -1,4 +1,3 @@
-DOCTYPE
 <!DOCTYPE html>
 <html>
 
@@ -16,13 +15,47 @@ DOCTYPE
   <script src="./scripts/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
   <script src="./scripts/init-firebase.js"></script>
+  <style>
+   label {
+  width:100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+label {
+  width:100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#universities{
+  align-content: center;
+  margin-left: 17%;
+  margin-right: 17%;
+}
+#checkbutton{
+  margin-left: 35%;
+}
+h1{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+
+  </style>
 </head>
 
 <body>
+    <div id="universities">
+  
   <h1>Find Matching University</h1>
 
 
-  <form action="#" onsubmit="checkUniversities()">
+  <form action="#" onsubmit="checkUniversities()" class="matchUni">
 
     <label for="all-fields">Select Field</label>
     <select id="all-fields"></select> <br />
@@ -36,10 +69,10 @@ DOCTYPE
     <label for="cities">City</label>
     <select id="cities"></select> <br />
 
-    <button type="submit">Check Universities</button>
+    <button id="checkbutton" type="submit">Check Universities</button>
   </form>
 
-  <div id="universities"></div>
+  </div>
 
   <script src="./scripts/nav-bar.js"></script>
   <script src="./allFields.js"></script>
