@@ -27,6 +27,9 @@
     #answers .labels {
       font-style: italic;
     }
+    .a-question{
+      margin-left: 30px;
+    }
   </style>
 </head>
 
@@ -51,7 +54,7 @@
       <span></span>
     </p>
   </div>
-  <h1>Survey</h1>
+  <h1 style="text-align: center;">Survey</h1>
 
   <div id="questions"></div>
 
@@ -64,7 +67,11 @@
     showQuestions();
 
     function setValue(THIS) {
-      document.getElementById(THIS.name).setAttribute("value", THIS.value);
+      if (THIS.checked === true) {
+        document.getElementById(THIS.name).setAttribute("value", THIS.value);
+      } else {
+        document.getElementById(THIS.name).setAttribute("value", "0");
+      }
     }
 
     function showQuestions() {
@@ -73,12 +80,12 @@
 
       _questions.forEach(function (q, i) {
         var qid = "q-" + i;
+
         QDIV.innerHTML +=
-          `<div value="1" id="${qid}" class="a-question">
-            <label>${i + 1}) ${q.question}</label>
-          ${optionKeys.map(function (key) {
-            return `<input type="radio" name="${qid}" value="${key}" onClick="setValue(this)" />`;
-          })}
+          `<div value="0" id="${qid}" class="a-question">
+            <label for="${qid}-tick">${i + 1}) ${q.question}</label> 
+            &nbsp;&nbsp;
+            <input type="checkbox" name="${qid}" value="${q.answer}" id="${qid}-tick" onclick="setValue(this)" />
           </div>`;
       });
     }
@@ -86,15 +93,17 @@
     function checkSurveyResults() {
       var allQuestions = document.getElementsByClassName("a-question");
 
-      var answers = {}; // first, initializing answers with zero value
+      var answers = {};
       var optionNames = [];
 
       for (var key of optionKeys) {
-        answers[key] = 0;
-        optionNames.push(_options[key]);
+        answers[key] = 0; // first, initializing answers with zero value
+
+        optionNames.push(_options[key]); // initializing answers' abbreviations
       }
 
       for (var question of allQuestions) {
+        if (question.getAttribute("value") === "0") { continue; }
         answers[question.getAttribute("value")] += 1;
       }
 
