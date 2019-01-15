@@ -44,7 +44,7 @@ var allCities = [
   "Quetta",
   "Rawalpindi",
   "Topi (KPK)",
-]
+];
 
 var fieldsOnFirebase = null;
 function getAllFields() {

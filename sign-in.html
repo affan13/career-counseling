@@ -1,99 +1,88 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
-  <style>
-    .class {
+<style>
+  .class {
       font-family: Arial, Helvetica, sans-serif;
     }
   </style>
 
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>SignIn</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>SignIn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
-    <link rel="stylesheet" href="./styles/bootstrap.min.css" />
-    <link rel="stylesheet" href="./styles/custom.css" />
+  <link rel="stylesheet" href="./styles/fonts.googleapis.css" />
+  <link rel="stylesheet" href="./styles/bootstrap.min.css" />
+  <link rel="stylesheet" href="./styles/custom.css" />
 
-    <script src="./scripts/jquery.min.js"></script>
-    <script src="./scripts/bootstrap.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
-    <script src="./scripts/init-firebase.js"></script>
-  </head>
+  <script src="./scripts/jquery.min.js"></script>
+  <script src="./scripts/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script src="./scripts/init-firebase.js"></script>
+</head>
 
-  <body>
-    <div class="container">
-      <div class="login-form">
-        <div class="main-div">
-          <div class="panel">
-            <h2>Login</h2>
-            <p>Please enter your email and password</p>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <div class="main-div">
+        <div class="panel">
+          <h2>Login</h2>
+          <p>Please enter your email and password</p>
+        </div>
+        <form id="Login" onsubmit="return signin()">
+          <div class="form-group">
+            <input type="email" class="form-control" id="email-input" placeholder="Email Address" required />
           </div>
-          <form id="Login" onsubmit="return signin()">
-            <div class="form-group">
-              <input
-                type="email"
-                class="form-control"
-                id="email-input"
-                placeholder="Email Address"
-                required
-              />
-            </div>
 
-            <div class="form-group">
-              <input
-                type="password"
-                class="form-control"
-                id="password-input"
-                placeholder="Password"
-                required
-              />
-            </div>
-            <!--
+          <div class="form-group">
+            <input type="password" class="form-control" id="password-input" placeholder="Password" required />
+          </div>
+          <!--
               <div class="forgot"><a href="reset.html">Forgot password?</a></div>
             -->
-            <button type="submit" class="btn btn-primary">Login</button>
-            <div class="login-register">
-              <a href="sign-up.html">SignUp Here</a>
-            </div>
-          </form>
-        </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <div class="login-register">
+            <a href="sign-up.html">SignUp Here</a>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
-    <script>
-      function signin() {
-        var e = document.getElementById("email-input").value;
-        var p = document.getElementById("password-input").value;
+  <script>
+    function signin() {
+      var e = document.getElementById("email-input").value;
+      var p = document.getElementById("password-input").value;
 
-        firebase
-          .auth()
-          .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-          .then(function() {
-            return firebase.auth().signInWithEmailAndPassword(e, p);
-          })
-          .then(function(response) {
-            console.log(response);
-            console.log(response.user);
-            if (response) {
-              alert("Signed in successfully: " + e);
-              if (response.user.email === "admin@fyp.com") {
-                window.location = "./admin-add-uni.html";
-              } else {
-                window.location = "./find-universities.html";
-              }
+      firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(function () {
+          return firebase.auth().signInWithEmailAndPassword(e, p);
+        })
+        .then(function (response) {
+          console.log(response);
+          console.log(response.user);
+          if (response) {
+            alert("Signed in successfully: " + e);
+            if (response.user.email.indexOf("admin") > -1) {
+              window.location = "./admin-add-uni.html";
+            } else {
+              window.location = "./landing-page.html";
             }
-          })
-          .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(errorMessage);
-          });
-        return false;
-      }
-    </script>
-    <script src="./scripts/nav-bar.js"></script>
-  </body>
+          }
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(errorMessage);
+        });
+      return false;
+    }
+  </script>
+  <script src="./scripts/nav-bar.js"></script>
+</body>
+
 </html>

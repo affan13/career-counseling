@@ -35,17 +35,18 @@ function createNavBar() {
   newElement.innerHTML = navbarKiInnerHTML;
   parent.insertBefore(newElement, firstElement);
 }
+
 function signout() {
   firebase
     .auth()
     .signOut()
-    .then(function() {
+    .then(function () {
       window.location.reload();
     });
 }
 
 function addSignOutButton() {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // adds sign-out button only if a user has signed in.
       var ul = document.getElementById("nav-bar-ul");
@@ -56,8 +57,10 @@ function addSignOutButton() {
     }
   });
 }
+
 function addFooter() {
-  var footerInnerHTML = `<footer class="social-footer">
+  var footerInnerHTML = `<footer class="social-footer"
+  style="position: sticky; bottom: 0; width: 100%">
   <div class="social-footer-left">&copy; 2018, All Rights Reserved.</div>
   <div class="social-footer-icons">
     <ul class="menu simple">
@@ -86,3 +89,39 @@ rel="stylesheet"
 createNavBar();
 addFooter();
 addSignOutButton();
+
+var url = window.location.href;
+var currentPage = url.substr(url.lastIndexOf("/"));
+
+switch (currentPage) {
+  case "/survey.html":
+    break;
+
+  default:
+    break;
+}
+
+checkUser();
+
+function checkUser() {
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      if (adminPages.includes(currentPage) && user.email.indexOf("@fypadmin.com") < 0) {
+        window.location.href = "index.html";
+      }
+    } else {
+      if (userPages.includes(currentPage) || adminPages.includes(currentPage)) {
+        window.location.href = "index.html";
+      }
+    }
+  });
+}
+
+var userPages = [
+  "/survey.html",
+  "/find-university.html",
+  "/landing-page.html",
+];
+var adminPages = [
+  "/admin-add-uni.html",
+];
